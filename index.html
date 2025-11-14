@@ -5,24 +5,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Catálogo Simple | Prueba Frontend</title>
   <meta name="description" content="Catálogo de productos electrónicos con buscador en vivo.">
-  <link rel="canonical" href="https://ejemplo.com/catalogo">
+  <link rel="canonical" href="/">
   <meta name="robots" content="index,follow">
   
   <!-- Open Graph -->
   <meta property="og:title" content="Catálogo Simple | Prueba Frontend">
   <meta property="og:description" content="Catálogo con buscador en vivo, accesible y responsive.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://ejemplo.com/og-image.png">
-  <meta property="og:url" content="https://ejemplo.com/catalogo">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content="/">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Catálogo Simple | Prueba Frontend">
   <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible y responsive.">
-  <meta name="twitter:image" content="https://ejemplo.com/og-image.png">
+  <meta name="twitter:image" content="/og-image.png">
 
-  <!-- CSS optimizado -->
-  <link rel="stylesheet" href="style.css" media="all">
+  <!-- Preload crítico para CSS -->
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
+
+  <!-- Preload para JS -->
+  <link rel="preload" href="script.js" as="script">
 </head>
 <body>
   <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -37,17 +41,19 @@
       <h2 id="search-title">Buscador en Vivo</h2>
       
       <div class="search-container">
-        <label for="search" class="sr-only">Buscar productos</label>
+        <label for="search-input" class="sr-only">Buscar productos por nombre o descripción</label>
         <input
-          id="search"
+          id="search-input"
           type="search"
           placeholder="Buscar productos..."
           aria-describedby="search-status"
+          size="25"
         >
         <div id="search-status" aria-live="polite"></div>
       </div>
 
-      <div id="products" class="products-grid">
+      <!-- Contenedor con dimensiones fijas para CLS 0 -->
+      <div id="products-container" class="products-grid" style="min-height: 400px;">
         <div id="empty-state" class="empty-state" hidden>
           <h3>No se encontraron productos</h3>
           <p>Intenta con otros términos de búsqueda.</p>
@@ -60,7 +66,7 @@
     <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad</p>
   </footer>
 
-  <!-- Script con defer y mínimo tamaño -->
+  <!-- Script con defer y carga optimizada -->
   <script src="script.js" defer></script>
 </body>
 </html>
