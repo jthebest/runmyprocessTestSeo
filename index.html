@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Catálogo simple | Prueba Frontend</title>
+
+  <!-- SEO básico -->
+  <meta name="description" content="Catálogo de productos con buscador en vivo, SEO básico y accesibilidad usando solo HTML, CSS y JavaScript." />
+  <link rel="canonical" href="http://localhost" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Catálogo simple | Prueba Frontend" />
+  <meta property="og:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og-image.png" />
+  <meta property="og:url" content="http://localhost:8000" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Catálogo simple | Prueba Frontend" />
+  <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
+  <meta name="twitter:image" content="og-image.png" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- JSON-LD: ItemList with Product elements -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Catálogo de productos",
+    "description": "Catálogo de productos electrónicos con buscador en vivo",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Product",
+          "name": "Auriculares Wave",
+          "description": "Auriculares inalámbricos con cancelación de ruido.",
+          "offers": { 
+            "@type": "Offer", 
+            "price": "59.90", 
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Product",
+          "name": "Teclado Luna",
+          "description": "Teclado mecánico compacto con switches rojos.",
+          "offers": { 
+            "@type": "Offer", 
+            "price": "89.00", 
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Product",
+          "name": "Mouse Orion",
+          "description": "Mouse ergonómico de alta precisión.",
+          "offers": { 
+            "@type": "Offer", 
+            "price": "39.50", 
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Product",
+          "name": "Monitor Vega 24”",
+          "description": "Monitor IPS 1080p con baja latencia y 75Hz.",
+          "offers": { 
+            "@type": "Offer", 
+            "price": "139.00", 
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Link to jump directly to main content (keyboard accessibility) -->
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <header>
+    <h1>Catálogo simple</h1>
+    <!-- Optional dynamic messages in header -->
+    <p class="status" aria-live="polite" id="statusTop"></p>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="container" aria-labelledby="titulo-buscador">
+      <h2 id="titulo-buscador">Buscador en vivo</h2>
+
+      <div class="search-group">
+        <!-- Hidden label for input (accessibility requirement) -->
+        <label for="q" class="visually-hidden">Buscar productos</label>
+
+        <!-- Search field that filters as the user types -->
+        <input
+          id="q"
+          name="q"
+          type="search"
+          placeholder="Escribe para filtrar…"
+          autocomplete="off"
+          aria-describedby="status"
+        />
+
+        <!-- Message accessible for results (aria-live='polite') -->
+        <div id="status" class="status" aria-live="polite"></div>
+      </div>
+
+      <!-- Container where product cards are painted -->
+      <div
+        id="list"
+        class="grid"
+        role="list"
+        aria-label="Resultados de productos"
+      ></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad · Diseño responsive</p>
+  </footer>
+
+  <!-- JS externo -->
+  <script src="script.js"></script>
+</body>
+</html>
