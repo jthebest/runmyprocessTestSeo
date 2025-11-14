@@ -3,32 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>Catálogo Simple | Prueba Frontend</title>
+
+  <!-- SEO -->
   <meta name="description" content="Catálogo de productos electrónicos con buscador en vivo.">
-  <link rel="canonical" href="/">
+  <!-- Usa una URL ABSOLUTA; cambia example.com por tu dominio si lo subes -->
+  <link rel="canonical" href="https://example.com/catalogo-simple">
   <meta name="robots" content="index,follow">
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="Catálogo Simple | Prueba Frontend">
   <meta property="og:description" content="Catálogo con buscador en vivo, accesible y responsive.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/og-image.png">
-  <meta property="og:url" content="/">
-  
+  <meta property="og:image" content="https://example.com/og-image.png">
+  <meta property="og:url" content="https://example.com/catalogo-simple">
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Catálogo Simple | Prueba Frontend">
   <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible y responsive.">
-  <meta name="twitter:image" content="/og-image.png">
+  <meta name="twitter:image" content="https://example.com/og-image.png">
 
-  <!-- Preload crítico para CSS -->
-  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css"></noscript>
-
-  <!-- Preload para JS -->
-  <link rel="preload" href="script.js" as="script">
+  <!-- CSS: link normal para evitar FOUC y layout shifts -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <!-- Accesibilidad: saltar directamente al contenido -->
   <a href="#main" class="skip-link">Saltar al contenido</a>
 
   <header>
@@ -39,21 +41,56 @@
   <main id="main" tabindex="-1">
     <section aria-labelledby="search-title">
       <h2 id="search-title">Buscador en Vivo</h2>
-      
+
       <div class="search-container">
-        <label for="search-input" class="sr-only">Buscar productos por nombre o descripción</label>
+        <label for="search-input" class="sr-only">
+          Buscar productos por nombre o descripción
+        </label>
+
         <input
           id="search-input"
           type="search"
           placeholder="Buscar productos..."
           aria-describedby="search-status"
-          size="25"
+          autocomplete="off"
         >
+
         <div id="search-status" aria-live="polite"></div>
       </div>
 
-      <!-- Contenedor con dimensiones fijas para CLS 0 -->
-      <div id="products-container" class="products-grid" style="min-height: 400px;">
+      <!-- Productos ya presentes en el DOM -->
+      <div id="products-container" class="products-grid">
+        <article class="product-card" data-price="59.9">
+          <h3>Auriculares Wave</h3>
+          <p class="product-price">$59.90</p>
+          <p>Auriculares inalámbricos con cancelación de ruido.</p>
+        </article>
+
+        <article class="product-card" data-price="89">
+          <h3>Teclado Luna</h3>
+          <p class="product-price">$89.00</p>
+          <p>Teclado mecánico compacto con switches rojos.</p>
+        </article>
+
+        <article class="product-card" data-price="39.5">
+          <h3>Mouse Orion</h3>
+          <p class="product-price">$39.50</p>
+          <p>Mouse ergonómico de alta precisión.</p>
+        </article>
+
+        <article class="product-card" data-price="199.99">
+          <h3>Monitor Eclipse</h3>
+          <p class="product-price">$199.99</p>
+          <p>Monitor 24" Full HD con tecnología IPS.</p>
+        </article>
+
+        <article class="product-card" data-price="79.49">
+          <h3>Altavoces Nova</h3>
+          <p class="product-price">$79.49</p>
+          <p>Sistema de altavoces 2.1 con sonido envolvente.</p>
+        </article>
+
+        <!-- Estado vacío accesible -->
         <div id="empty-state" class="empty-state" hidden>
           <h3>No se encontraron productos</h3>
           <p>Intenta con otros términos de búsqueda.</p>
@@ -66,7 +103,7 @@
     <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad</p>
   </footer>
 
-  <!-- Script con defer y carga optimizada -->
+  <!-- JS defer para no bloquear el render -->
   <script src="script.js" defer></script>
 </body>
 </html>
