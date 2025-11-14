@@ -1,149 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Catálogo Simple | Prueba Frontend</title>
-
-  <!-- Basic SEO -->
-  <meta name="description" content="Catálogo de productos electrónicos con buscador en vivo, SEO básico y accesibilidad usando solo HTML, CSS y JavaScript." />
-  <link rel="canonical" href="https://ejemplo.com/catalogo" />
-  <meta name="robots" content="index,follow" />
-
+  <meta name="description" content="Catálogo de productos electrónicos con buscador en vivo.">
+  <link rel="canonical" href="https://ejemplo.com/catalogo">
+  <meta name="robots" content="index,follow">
+  
   <!-- Open Graph -->
-  <meta property="og:title" content="Catálogo Simple | Prueba Frontend" />
-  <meta property="og:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://ejemplo.com/og-image.png" />
-  <meta property="og:url" content="https://ejemplo.com/catalogo" />
-
+  <meta property="og:title" content="Catálogo Simple | Prueba Frontend">
+  <meta property="og:description" content="Catálogo con buscador en vivo, accesible y responsive.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://ejemplo.com/og-image.png">
+  <meta property="og:url" content="https://ejemplo.com/catalogo">
+  
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Catálogo Simple | Prueba Frontend" />
-  <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
-  <meta name="twitter:image" content="https://ejemplo.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Catálogo Simple | Prueba Frontend">
+  <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible y responsive.">
+  <meta name="twitter:image" content="https://ejemplo.com/og-image.png">
 
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- JSON-LD: ItemList with Product elements -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Catálogo de Productos Electrónicos",
-    "description": "Catálogo de productos electrónicos con buscador en vivo y filtros",
-    "url": "https://ejemplo.com/catalogo",
-    "numberOfItems": 4,
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "Product",
-          "name": "Auriculares Wave",
-          "description": "Auriculares inalámbricos con cancelación de ruido.",
-          "category": "Audio",
-          "offers": {
-            "@type": "Offer",
-            "price": "59.90",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "Product",
-          "name": "Teclado Luna",
-          "description": "Teclado mecánico compacto con switches rojos.",
-          "category": "Periféricos",
-          "offers": {
-            "@type": "Offer",
-            "price": "89.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "Product",
-          "name": "Mouse Orion",
-          "description": "Mouse ergonómico de alta precisión.",
-          "category": "Periféricos",
-          "offers": {
-            "@type": "Offer",
-            "price": "39.50",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@type": "Product",
-          "name": "Monitor Vega 24”",
-          "description": "Monitor IPS 1080p con baja latencia y 75Hz.",
-          "category": "Monitores",
-          "offers": {
-            "@type": "Offer",
-            "price": "139.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      }
-    ]
-  }
-  </script>
+  <!-- CSS optimizado -->
+  <link rel="stylesheet" href="style.css" media="all">
 </head>
 <body>
-  <!-- Skip to main content link -->
-  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
 
   <header>
-    <div class="header-content">
-      <h1>Catálogo Simple</h1>
-      <div class="status" aria-live="polite" id="statusTop"></div>
-    </div>
+    <h1>Catálogo Simple</h1>
+    <div id="status-top" aria-live="polite"></div>
   </header>
 
-  <main id="main-content" tabindex="-1">
-    <section class="container" aria-labelledby="search-title">
+  <main id="main" tabindex="-1">
+    <section aria-labelledby="search-title">
       <h2 id="search-title">Buscador en Vivo</h2>
-
-      <div class="search-group">
-        <label for="search-input" class="visually-hidden">Buscar productos por nombre o descripción</label>
-
+      
+      <div class="search-container">
+        <label for="search" class="sr-only">Buscar productos</label>
         <input
-          id="search-input"
+          id="search"
           type="search"
-          placeholder="Escribe para filtrar productos…"
-          autocomplete="off"
+          placeholder="Buscar productos..."
           aria-describedby="search-status"
-        />
-
-        <div id="search-status" class="status" aria-live="polite" aria-atomic="true"></div>
+        >
+        <div id="search-status" aria-live="polite"></div>
       </div>
 
-      <div id="products-list" class="grid" aria-label="Resultados de productos"></div>
+      <div id="products" class="products-grid">
+        <div id="empty-state" class="empty-state" hidden>
+          <h3>No se encontraron productos</h3>
+          <p>Intenta con otros términos de búsqueda.</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-content">
-      <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad · Diseño Responsive</p>
-    </div>
+    <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Script con defer y mínimo tamaño -->
+  <script src="script.js" defer></script>
 </body>
 </html>
