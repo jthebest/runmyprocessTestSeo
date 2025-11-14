@@ -1,202 +1,245 @@
-/* Base palette in light mode */
+/* Color variables - improved contrast */
 :root {
   --bg: #ffffff;
-  --fg: #111111;
-  --muted: #666666;
-  --primary: #0a7cff;
-  --surface: #f4f6f8;
-  --focus: #ffab00;
-  --border: #e0e0e0;
-  --success: #2e7d32;
-  --error: #d32f2f;
+  --text: #000000;
+  --muted: #404040;
+  --primary: #0066cc;
+  --surface: #f8f9fa;
+  --focus: #b38700;
+  --border: #d0d0d0;
+  --success: #1a5e1a;
+  --error: #b71c1c;
+  --shadow: rgba(0, 0, 0, 0.15);
 }
 
-/* Dark mode with prefers-color-scheme (requirement) */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0b0f14;
-    --fg: #e6e6e6;
-    --muted: #a0a0a0;
-    --surface: #171b21;
-    --primary: #7bb0ff;
-    --focus: #ffd166;
-    --border: #2a2f3a;
+    --bg: #0a0a0a;
+    --text: #ffffff;
+    --muted: #b0b0b0;
+    --surface: #1a1a1a;
+    --primary: #4d9fff;
+    --focus: #ffd54d;
+    --border: #404040;
   }
 }
 
+/* Base styles */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   background: var(--bg);
-  color: var(--fg);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  line-height: 1.5;
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-a {
-  color: var(--primary);
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  background: var(--focus);
+  color: #000;
+  padding: 12px 16px;
+  z-index: 1000;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 2px solid #000;
 }
 
-/* Visible focus for keyboard navigation (requirement) */
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
+
+/* Focus styles */
 a:focus,
-input:focus,
-button:focus {
+input:focus {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 
-/* "Skip to content" link: visually hidden until it has focus */
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  background: var(--focus);
-  color: #000;
-  padding: 8px 12px;
-  z-index: 1000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-.skip-link:focus {
-  left: 8px;
-  top: 8px;
-}
-
-header,
-footer {
+/* Header & Footer */
+header {
   padding: 24px 16px;
   border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
+  background: var(--surface);
+  padding: 24px 16px;
   margin-top: auto;
 }
 
-main {
-  padding: 24px 16px;
+.header-content,
+.footer-content {
   max-width: 960px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* General container and column layout */
-.container {
-  display: grid;
-  gap: 16px;
+.footer-content {
+  text-align: center;
 }
 
-/* Search block: input + message */
+/* Main content */
+main {
+  padding: 32px 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+/* Layout */
+.container {
+  display: grid;
+  gap: 24px;
+}
+
 .search-group {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   max-width: 500px;
 }
 
-/* Text for screen readers only */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
+/* Search input */
 input[type="search"] {
-  padding: 12px 14px;
-  border: 1px solid var(--border);
+  padding: 14px 16px;
+  border: 2px solid var(--border);
   border-radius: 8px;
   background: var(--bg);
-  color: var(--fg);
+  color: var(--text);
   font-size: 1rem;
-  transition: border-color 0.2s;
+  width: 100%;
 }
 
-input[type="search"]:hover {
+input[type="search"]:focus {
   border-color: var(--primary);
 }
 
+/* Status messages */
 .status {
   font-size: 0.95rem;
-  color: var(--muted);
-  min-height: 1.2em; /* Reserve space even if it's empty */
+  min-height: 1.2em;
+  padding: 4px 0;
+  font-weight: 500;
 }
 
 .status--empty {
   color: var(--error);
+  font-weight: 600;
 }
 
 .status--success {
   color: var(--success);
+  font-weight: 600;
 }
 
-/* Responsive grid for product cards */
+/* Products grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 16px;
 }
 
 /* Product card */
 .card {
   background: var(--surface);
   border-radius: 12px;
-  padding: 16px;
-  border: 1px solid var(--border);
+  padding: 20px;
+  border: 2px solid var(--border);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .card h3 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .price {
-  font-weight: 600;
-  margin: 0 0 8px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 1.375rem;
 }
 
-/* Responsive adjustments */
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--muted);
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* Screen reader only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
   }
   
   main {
-    padding: 16px 12px;
+    padding: 24px 16px;
   }
   
   header, footer {
-    padding: 16px 12px;
+    padding: 20px 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
   }
   
+  .search-group {
+    max-width: 100%;
+  }
+  
   input[type="search"] {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
   }
 }

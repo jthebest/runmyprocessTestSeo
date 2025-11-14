@@ -4,25 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Catálogo simple | Prueba Frontend</title>
+  <title>Catálogo Simple | Prueba Frontend</title>
 
-  <!-- SEO básico -->
-  <meta name="description" content="Catálogo de productos con buscador en vivo, SEO básico y accesibilidad usando solo HTML, CSS y JavaScript." />
-  <link rel="canonical" href="http://localhost" />
+  <!-- Basic SEO -->
+  <meta name="description" content="Catálogo de productos electrónicos con buscador en vivo, SEO básico y accesibilidad usando solo HTML, CSS y JavaScript." />
+  <link rel="canonical" href="https://ejemplo.com/catalogo" />
   <meta name="robots" content="index,follow" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Catálogo simple | Prueba Frontend" />
+  <meta property="og:title" content="Catálogo Simple | Prueba Frontend" />
   <meta property="og:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="og-image.png" />
-  <meta property="og:url" content="http://localhost:8000" />
+  <meta property="og:image" content="https://ejemplo.com/og-image.png" />
+  <meta property="og:url" content="https://ejemplo.com/catalogo" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Catálogo simple | Prueba Frontend" />
+  <meta name="twitter:title" content="Catálogo Simple | Prueba Frontend" />
   <meta name="twitter:description" content="Catálogo con buscador en vivo, accesible, responsive y construido con JavaScript puro." />
-  <meta name="twitter:image" content="og-image.png" />
+  <meta name="twitter:image" content="https://ejemplo.com/og-image.png" />
 
   <!-- External CSS -->
   <link rel="stylesheet" href="style.css" />
@@ -32,8 +32,10 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Catálogo de productos",
-    "description": "Catálogo de productos electrónicos con buscador en vivo",
+    "name": "Catálogo de Productos Electrónicos",
+    "description": "Catálogo de productos electrónicos con buscador en vivo y filtros",
+    "url": "https://ejemplo.com/catalogo",
+    "numberOfItems": 4,
     "itemListElement": [
       {
         "@type": "ListItem",
@@ -42,9 +44,10 @@
           "@type": "Product",
           "name": "Auriculares Wave",
           "description": "Auriculares inalámbricos con cancelación de ruido.",
-          "offers": { 
-            "@type": "Offer", 
-            "price": "59.90", 
+          "category": "Audio",
+          "offers": {
+            "@type": "Offer",
+            "price": "59.90",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock"
           }
@@ -57,9 +60,10 @@
           "@type": "Product",
           "name": "Teclado Luna",
           "description": "Teclado mecánico compacto con switches rojos.",
-          "offers": { 
-            "@type": "Offer", 
-            "price": "89.00", 
+          "category": "Periféricos",
+          "offers": {
+            "@type": "Offer",
+            "price": "89.00",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock"
           }
@@ -72,9 +76,10 @@
           "@type": "Product",
           "name": "Mouse Orion",
           "description": "Mouse ergonómico de alta precisión.",
-          "offers": { 
-            "@type": "Offer", 
-            "price": "39.50", 
+          "category": "Periféricos",
+          "offers": {
+            "@type": "Offer",
+            "price": "39.50",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock"
           }
@@ -87,9 +92,10 @@
           "@type": "Product",
           "name": "Monitor Vega 24”",
           "description": "Monitor IPS 1080p con baja latencia y 75Hz.",
-          "offers": { 
-            "@type": "Offer", 
-            "price": "139.00", 
+          "category": "Monitores",
+          "offers": {
+            "@type": "Offer",
+            "price": "139.00",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock"
           }
@@ -100,52 +106,44 @@
   </script>
 </head>
 <body>
-  <!-- Link to jump directly to main content (keyboard accessibility) -->
-  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <!-- Skip to main content link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
   <header>
-    <h1>Catálogo simple</h1>
-    <!-- Optional dynamic messages in header -->
-    <p class="status" aria-live="polite" id="statusTop"></p>
+    <div class="header-content">
+      <h1>Catálogo Simple</h1>
+      <div class="status" aria-live="polite" id="statusTop"></div>
+    </div>
   </header>
 
-  <main id="contenido" tabindex="-1">
-    <section class="container" aria-labelledby="titulo-buscador">
-      <h2 id="titulo-buscador">Buscador en vivo</h2>
+  <main id="main-content" tabindex="-1">
+    <section class="container" aria-labelledby="search-title">
+      <h2 id="search-title">Buscador en Vivo</h2>
 
       <div class="search-group">
-        <!-- Hidden label for input (accessibility requirement) -->
-        <label for="q" class="visually-hidden">Buscar productos</label>
+        <label for="search-input" class="visually-hidden">Buscar productos por nombre o descripción</label>
 
-        <!-- Search field that filters as the user types -->
         <input
-          id="q"
-          name="q"
+          id="search-input"
           type="search"
-          placeholder="Escribe para filtrar…"
+          placeholder="Escribe para filtrar productos…"
           autocomplete="off"
-          aria-describedby="status"
+          aria-describedby="search-status"
         />
 
-        <!-- Message accessible for results (aria-live='polite') -->
-        <div id="status" class="status" aria-live="polite"></div>
+        <div id="search-status" class="status" aria-live="polite" aria-atomic="true"></div>
       </div>
 
-      <!-- Container where product cards are painted -->
-      <div
-        id="list"
-        class="grid"
-        role="list"
-        aria-label="Resultados de productos"
-      ></div>
+      <div id="products-list" class="grid" aria-label="Resultados de productos"></div>
     </section>
   </main>
 
   <footer>
-    <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad · Diseño responsive</p>
+    <div class="footer-content">
+      <p>Prueba Frontend — Vanilla JS · SEO · Accesibilidad · Diseño Responsive</p>
+    </div>
   </footer>
 
-  <!-- JS externo -->
   <script src="script.js"></script>
 </body>
 </html>
